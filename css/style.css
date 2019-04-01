@@ -8,3 +8,13 @@
   width:100%;
   display:inline-block;
 }
+
+html {
+  background-color: #d8bb84;
+}
+
+h1 {
+  color: #1d1a1d;
+  background-color: #ce6b41;
+  padding: 30px;
+}
