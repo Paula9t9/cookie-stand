@@ -6,13 +6,14 @@ var pike = {
   maxCust: 65,
   avgCookie: 6.3,
   custPerHour: [],
-  cookiesPerHour: [], 
+  cookiesPerHour: [],
   totalCookies: 0
 };
 
 pike.custPerHour = custPerHour(pike.minCust, pike.maxCust);
 pike.cookiesPerHour = cookiesPerHour(pike.custPerHour, pike.avgCookie);
-displaySales(pike.locationName, pike.cookiesPerHour);
+pike.totalCookies = totalCookies(pike.cookiesPerHour);
+displaySales(pike.locationName, pike.cookiesPerHour, pike.totalCookies);
 
 
 function custPerHour(min, max){
@@ -36,7 +37,17 @@ function cookiesPerHour(custArray, avgCookies){
   return cookieArray;
 }
 
-function displaySales(storeLocation, cookieArray){
+function totalCookies(cookieArray){
+  var totalCookies = 0;
+
+  for(var i=0; i<cookieArray.length; i++){
+    totalCookies += cookieArray[i];
+  }
+
+  return totalCookies;
+}
+
+function displaySales(storeLocation, cookieArray, totalCookies){
 
   var salesDivEl = document.getElementById('sales');
   var salesUlEl = document.createElement('ul');
@@ -55,6 +66,10 @@ function displaySales(storeLocation, cookieArray){
     salesLiEl.textContent = timeString + cookieArray[i] + ' cookies';
     salesUlEl.appendChild(salesLiEl);
   }
+
+  var totalLiEl = document.createElement('li');
+  totalLiEl.textContent = 'Total: ' + totalCookies + ' cookies';
+  salesUlEl.appendChild(totalLiEl);
 }
 
 //Take in the military time and convert it to a standard string
@@ -76,5 +91,4 @@ function calcTime(hour){
   }
 
   return timeString;
-  
 }
