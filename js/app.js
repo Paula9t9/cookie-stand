@@ -10,11 +10,70 @@ var pike = {
   totalCookies: 0
 };
 
+var seaTac = {
+  locationName: 'SeaTac Airport',
+  minCust: 3,
+  maxCust: 24,
+  avgCookie: 1.2,
+  custPerHour: [],
+  cookiesPerHour: [],
+  totalCookies: 0
+};
+
+var seaCenter = {
+  locationName: 'Seattle Center',
+  minCust: 11,
+  maxCust: 38,
+  avgCookie: 3.7,
+  custPerHour: [],
+  cookiesPerHour: [],
+  totalCookies: 0
+};
+
+var capHill = {
+  locationName: 'Capitol Hill',
+  minCust: 20,
+  maxCust: 38,
+  avgCookie: 2.3,
+  custPerHour: [],
+  cookiesPerHour: [],
+  totalCookies: 0
+};
+
+var alki = {
+  locationName: 'Alki',
+  minCust: 2,
+  maxCust: 16,
+  avgCookie: 4.6,
+  custPerHour: [],
+  cookiesPerHour: [],
+  totalCookies: 0
+};
+
 pike.custPerHour = custPerHour(pike.minCust, pike.maxCust);
 pike.cookiesPerHour = cookiesPerHour(pike.custPerHour, pike.avgCookie);
 pike.totalCookies = totalCookies(pike.cookiesPerHour);
 displaySales(pike.locationName, pike.cookiesPerHour, pike.totalCookies);
 
+seaTac.custPerHour = custPerHour(seaTac.minCust, seaTac.maxCust);
+seaTac.cookiesPerHour = cookiesPerHour(seaTac.custPerHour, seaTac.avgCookie);
+seaTac.totalCookies = totalCookies(seaTac.cookiesPerHour);
+displaySales(seaTac.locationName, seaTac.cookiesPerHour, seaTac.totalCookies);
+
+seaCenter.custPerHour = custPerHour(seaCenter.minCust, seaCenter.maxCust);
+seaCenter.cookiesPerHour = cookiesPerHour(seaCenter.custPerHour, seaCenter.avgCookie);
+seaCenter.totalCookies = totalCookies(seaCenter.cookiesPerHour);
+displaySales(seaCenter.locationName, seaCenter.cookiesPerHour, seaCenter.totalCookies);
+
+capHill.custPerHour = custPerHour(capHill.minCust, capHill.maxCust);
+capHill.cookiesPerHour = cookiesPerHour(capHill.custPerHour, capHill.avgCookie);
+capHill.totalCookies = totalCookies(capHill.cookiesPerHour);
+displaySales(capHill.locationName, capHill.cookiesPerHour, capHill.totalCookies);
+
+alki.custPerHour = custPerHour(alki.minCust, alki.maxCust);
+alki.cookiesPerHour = cookiesPerHour(alki.custPerHour, alki.avgCookie);
+alki.totalCookies = totalCookies(alki.cookiesPerHour);
+displaySales(alki.locationName, alki.cookiesPerHour, alki.totalCookies);
 
 function custPerHour(min, max){
   var custArray = [];
