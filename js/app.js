@@ -108,14 +108,19 @@ function totalCookies(cookieArray){
 
 function displaySales(storeLocation, cookieArray, totalCookies){
 
+  //Wrapped each store in own dive for proper column wrapping
+  //Used this to figure out how to add class name: https://www.w3schools.com/jsref/prop_html_classname.asp 
   var salesDivEl = document.getElementById('sales');
+  var storeDivEl = document.createElement('div');
   var salesUlEl = document.createElement('ul');
   var locationH2El = document.createElement('h2');
 
   locationH2El.textContent = storeLocation;
+  storeDivEl.className = 'storeItem';
 
-  salesDivEl.appendChild(locationH2El);
-  salesDivEl.appendChild(salesUlEl);
+  salesDivEl.appendChild(storeDivEl);
+  storeDivEl.appendChild(locationH2El);
+  storeDivEl.appendChild(salesUlEl);
 
   for(var i = 0; i < cookieArray.length; i++){
     var currentHour = i + 6;
@@ -141,7 +146,7 @@ function calcTime(hour){
     hour -= 12;
   }
 
-  var timeString; 
+  var timeString;
 
   if(am){
     timeString = hour + ' am: ';
