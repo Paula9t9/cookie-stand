@@ -92,15 +92,7 @@ function makeHeaderRow(){
   var trEl = document.createElement('tr');
 
   var thEl = document.createElement('th');
-  thEl.textContent = 'Location ';
-  trEl.appendChild(thEl);
-
-  thEl = document.createElement('th');
-  thEl.textContent = 'Min Customers/Hr ';
-  trEl.appendChild(thEl);
-
-  thEl = document.createElement('th');
-  thEl.textContent = 'Max Customers/Hr ';
+  thEl.textContent = '';
   trEl.appendChild(thEl);
 
   for(var i = 0; i < hours; i++){
