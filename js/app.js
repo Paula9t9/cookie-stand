@@ -1,13 +1,7 @@
 //Number of hours the shop is open.
 var hours = 15;
 var allStores = [];
-
-
-// pike.custEachHour = calcCustEachHour(pike.minCustPerHour, pike.maxCustPerHour);
-// pike.cookiesEachHour = calcCookiesEachHour(pike.custEachHour, pike.avgCookiePerCust);
-// pike.totalCookiesForDay = calcTotalCookies(pike.cookiesEachHour);
-// displaySales(pike.locationName, pike.cookiesEachHour, pike.totalCookiesForDay);
-
+var salesTable = document.getElementById('sales');
 
 
 //Renamed vars according to demo so naming is clearer
@@ -33,10 +27,7 @@ var alki = new Store('Alki', 2, 16, 4.6);
 console.table(allStores);
 
 
-
-
 Store.prototype.calcCustEachHour = function(){
-
 
   for(var i=0; i < hours; i++){
     var customers = Math.round(Math.random() * (this.maxCustPerHour - this.minCustPerHour) + this.minCustPerHour);
@@ -67,7 +58,7 @@ Store.prototype.calcTotalCookies = function(){
 
 function displaySales(storeLocation, cookieArray, totalCookies){
 
-  //Wrapped each store in own dive for proper column wrapping
+  //Wrapped each store in own div for proper column wrapping
   //Used this to figure out how to add class name: https://www.w3schools.com/jsref/prop_html_classname.asp
   var salesDivEl = document.getElementById('sales');
   var storeDivEl = document.createElement('div');
@@ -96,6 +87,45 @@ function displaySales(storeLocation, cookieArray, totalCookies){
   salesUlEl.appendChild(totalLiEl);
 }
 
+function makeHeaderRow(){
+
+  var trEl = document.createElement('tr');
+
+  var thEl = document.createElement('th');
+  thEl.textContent = 'Location ';
+  trEl.appendChild(thEl);
+
+  thEl = document.createElement('th');
+  thEl.textContent = 'Min Customers/Hr ';
+  trEl.appendChild(thEl);
+
+  thEl = document.createElement('th');
+  thEl.textContent = 'Max Customers/Hr ';
+  trEl.appendChild(thEl);
+
+  for(var i = 0; i < hours; i++){
+    var currentHour = i + 6;
+    var hourString = calcTime(currentHour);
+
+    thEl = document.createElement('th');
+    thEl.textContent = hourString;
+    trEl.appendChild(thEl);
+  }
+
+  thEl = document.createElement('th');
+  thEl.textContent = 'Daily Location Total';
+  trEl.appendChild(thEl);
+
+  salesTable.appendChild(trEl);
+
+}
+
+
+
+function makeFooterRow(){
+
+}
+
 
 //Take in the military time* and converts it to a standard string
 //*takes an int, not an actual time var
@@ -111,9 +141,9 @@ function calcTime(hour){
   var timeString;
 
   if(am){
-    timeString = hour + ' am: ';
+    timeString = hour + ' am ';
   }else if(!am){
-    timeString = hour + ' pm: ';
+    timeString = hour + ' pm ';
   }
 
   return timeString;
@@ -122,3 +152,4 @@ function calcTime(hour){
 pike.calcCustEachHour();
 pike.calcCookiesEachHour();
 pike.calcTotalCookies();
+makeHeaderRow();
