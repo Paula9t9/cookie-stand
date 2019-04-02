@@ -1,32 +1,34 @@
+//Number of hours the shop is open.
 var hours = 15;
 
+//Renamed vars according to demo so naming is clearer
 var pike = {
   locationName: '1st and Pike',
-  minCust: 23,
-  maxCust: 65,
-  avgCookie: 6.3,
-  custPerHour: [],
-  cookiesPerHour: [],
-  totalCookies: 0
+  minCustPerHour: 23,
+  maxCustPerHour: 65,
+  avgCookiePerCust: 6.3,
+  custEachHour: [],
+  cookiesEachHour: [],
+  totalCookiesForDay: 0
 };
 
 var seaTac = {
   locationName: 'SeaTac Airport',
-  minCust: 3,
-  maxCust: 24,
+  minCustPerHour: 3,
+  maxCustPerHour: 24,
   avgCookie: 1.2,
-  custPerHour: [],
-  cookiesPerHour: [],
+  custEachHour: [],
+  cookiesEachHour: [],
   totalCookies: 0
 };
 
 var seaCenter = {
   locationName: 'Seattle Center',
-  minCust: 11,
-  maxCust: 38,
+  minCustPerHour: 11,
+  maxCustPerHour: 38,
   avgCookie: 3.7,
-  custPerHour: [],
-  cookiesPerHour: [],
+  custEachHour: [],
+  cookiesEachHour: [],
   totalCookies: 0
 };
 
@@ -35,8 +37,8 @@ var capHill = {
   minCust: 20,
   maxCust: 38,
   avgCookie: 2.3,
-  custPerHour: [],
-  cookiesPerHour: [],
+  custEachHour: [],
+  cookiesEachHour: [],
   totalCookies: 0
 };
 
@@ -45,37 +47,39 @@ var alki = {
   minCust: 2,
   maxCust: 16,
   avgCookie: 4.6,
-  custPerHour: [],
-  cookiesPerHour: [],
+  custEachHour: [],
+  cookiesEachHour: [],
   totalCookies: 0
 };
 
-pike.custPerHour = custPerHour(pike.minCust, pike.maxCust);
-pike.cookiesPerHour = cookiesPerHour(pike.custPerHour, pike.avgCookie);
-pike.totalCookies = totalCookies(pike.cookiesPerHour);
-displaySales(pike.locationName, pike.cookiesPerHour, pike.totalCookies);
 
-seaTac.custPerHour = custPerHour(seaTac.minCust, seaTac.maxCust);
-seaTac.cookiesPerHour = cookiesPerHour(seaTac.custPerHour, seaTac.avgCookie);
-seaTac.totalCookies = totalCookies(seaTac.cookiesPerHour);
-displaySales(seaTac.locationName, seaTac.cookiesPerHour, seaTac.totalCookies);
+pike.custEachHour = calcCustEachHour(pike.minCustPerHour, pike.maxCustPerHour);
+pike.cookiesEachHour = calcCookiesEachHour(pike.custEachHour, pike.avgCookiePerCust);
+pike.totalCookiesForDay = calcTotalCookies(pike.cookiesEachHour);
+displaySales(pike.locationName, pike.cookiesEachHour, pike.totalCookiesForDay);
 
-seaCenter.custPerHour = custPerHour(seaCenter.minCust, seaCenter.maxCust);
-seaCenter.cookiesPerHour = cookiesPerHour(seaCenter.custPerHour, seaCenter.avgCookie);
-seaCenter.totalCookies = totalCookies(seaCenter.cookiesPerHour);
-displaySales(seaCenter.locationName, seaCenter.cookiesPerHour, seaCenter.totalCookies);
+seaTac.custEachHour = calcCustEachHour(seaTac.minCustPerHour, seaTac.maxCustPerHour);
+seaTac.cookiesEachHour = calcCookiesEachHour(seaTac.custEachHour, seaTac.avgCookie);
+seaTac.totalCookies = calcTotalCookies(seaTac.cookiesEachHour);
+displaySales(seaTac.locationName, seaTac.cookiesEachHour, seaTac.totalCookies);
 
-capHill.custPerHour = custPerHour(capHill.minCust, capHill.maxCust);
-capHill.cookiesPerHour = cookiesPerHour(capHill.custPerHour, capHill.avgCookie);
-capHill.totalCookies = totalCookies(capHill.cookiesPerHour);
-displaySales(capHill.locationName, capHill.cookiesPerHour, capHill.totalCookies);
+seaCenter.custEachHour = calcCustEachHour(seaCenter.minCustPerHour, seaCenter.maxCustPerHour);
+seaCenter.cookiesEachHour = calcCookiesEachHour(seaCenter.custEachHour, seaCenter.avgCookie);
+seaCenter.totalCookies = calcTotalCookies(seaCenter.cookiesEachHour);
+displaySales(seaCenter.locationName, seaCenter.cookiesEachHour, seaCenter.totalCookies);
 
-alki.custPerHour = custPerHour(alki.minCust, alki.maxCust);
-alki.cookiesPerHour = cookiesPerHour(alki.custPerHour, alki.avgCookie);
-alki.totalCookies = totalCookies(alki.cookiesPerHour);
-displaySales(alki.locationName, alki.cookiesPerHour, alki.totalCookies);
+capHill.custEachHour = calcCustEachHour(capHill.minCust, capHill.maxCust);
+capHill.cookiesEachHour = calcCookiesEachHour(capHill.custEachHour, capHill.avgCookie);
+capHill.totalCookies = calcTotalCookies(capHill.cookiesEachHour);
+displaySales(capHill.locationName, capHill.cookiesEachHour, capHill.totalCookies);
 
-function custPerHour(min, max){
+alki.custEachHour = calcCustEachHour(alki.minCust, alki.maxCust);
+alki.cookiesEachHour = calcCookiesEachHour(alki.custEachHour, alki.avgCookie);
+alki.totalCookies = calcTotalCookies(alki.cookiesEachHour);
+displaySales(alki.locationName, alki.cookiesEachHour, alki.totalCookies);
+
+
+function calcCustEachHour(min, max){
   var custArray = [];
 
   for(var i=0; i < hours; i++){
@@ -85,31 +89,34 @@ function custPerHour(min, max){
   return custArray;
 }
 
-function cookiesPerHour(custArray, avgCookies){
+
+function calcCookiesEachHour(custArray, avgCookies){
 
   var cookieArray = [];
 
   for (var i=0; i < custArray.length; i++){
-    cookieArray[i] = Math.round(custArray[i] * avgCookies);
+    cookieArray[i] = Math.ceil(custArray[i] * avgCookies);
   }
 
   return cookieArray;
 }
 
-function totalCookies(cookieArray){
+
+function calcTotalCookies(cookieArray){
   var totalCookies = 0;
 
-  for(var i=0; i<cookieArray.length; i++){
+  for(var i=0; i < cookieArray.length; i++){
     totalCookies += cookieArray[i];
   }
 
   return totalCookies;
 }
 
+
 function displaySales(storeLocation, cookieArray, totalCookies){
 
   //Wrapped each store in own dive for proper column wrapping
-  //Used this to figure out how to add class name: https://www.w3schools.com/jsref/prop_html_classname.asp 
+  //Used this to figure out how to add class name: https://www.w3schools.com/jsref/prop_html_classname.asp
   var salesDivEl = document.getElementById('sales');
   var storeDivEl = document.createElement('div');
   var salesUlEl = document.createElement('ul');
@@ -123,6 +130,7 @@ function displaySales(storeLocation, cookieArray, totalCookies){
   storeDivEl.appendChild(salesUlEl);
 
   for(var i = 0; i < cookieArray.length; i++){
+    //Add 6 because store opens at 6am
     var currentHour = i + 6;
     var timeString = calcTime(currentHour);
 
@@ -136,7 +144,9 @@ function displaySales(storeLocation, cookieArray, totalCookies){
   salesUlEl.appendChild(totalLiEl);
 }
 
-//Take in the military time and convert it to a standard string
+
+//Take in the military time* and converts it to a standard string
+//*takes an int, not an actual time var
 function calcTime(hour){
   var am = true;
   if (hour === 12){
