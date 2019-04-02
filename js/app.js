@@ -56,36 +56,35 @@ Store.prototype.calcTotalCookies = function(){
 };
 
 
-function displaySales(storeLocation, cookieArray, totalCookies){
+Store.prototype.render = function(){
+  var trEl = document.createElement('tr');
 
-  //Wrapped each store in own div for proper column wrapping
-  //Used this to figure out how to add class name: https://www.w3schools.com/jsref/prop_html_classname.asp
-  var salesDivEl = document.getElementById('sales');
-  var storeDivEl = document.createElement('div');
-  var salesUlEl = document.createElement('ul');
-  var locationH2El = document.createElement('h2');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.locationName;
+  trEl.appendChild(tdEl);
 
-  locationH2El.textContent = storeLocation;
-  storeDivEl.className = 'storeItem';
+  tdEl = document.createElement('td');
+  tdEl.textContent = this.minCustPerHour;
+  trEl.appendChild(tdEl);
 
-  salesDivEl.appendChild(storeDivEl);
-  storeDivEl.appendChild(locationH2El);
-  storeDivEl.appendChild(salesUlEl);
+  tdEl = document.createElement('td');
+  tdEl.textContent = this.maxCustPerHour;
+  trEl.appendChild(tdEl);
 
-  for(var i = 0; i < cookieArray.length; i++){
-    //Add 6 because store opens at 6am
-    var currentHour = i + 6;
-    var timeString = calcTime(currentHour);
+  for(var i = 0; i < this.cookiesEachHour.length; i++){
 
-    var salesLiEl = document.createElement('li');
-    salesLiEl.textContent = timeString + cookieArray[i] + ' cookies';
-    salesUlEl.appendChild(salesLiEl);
+    tdEl = document.createElement('td');
+    tdEl.textContent = this.cookiesEachHour[i];
+    trEl.appendChild(tdEl);
+
   }
 
-  var totalLiEl = document.createElement('li');
-  totalLiEl.textContent = 'Total: ' + totalCookies + ' cookies';
-  salesUlEl.appendChild(totalLiEl);
-}
+  tdEl = document.createElement('td');
+  tdEl.textContent = this.totalCookiesForDay;
+  trEl.appendChild(tdEl);
+
+  salesTable.appendChild(trEl);
+};
 
 function makeHeaderRow(){
 
@@ -153,3 +152,4 @@ pike.calcCustEachHour();
 pike.calcCookiesEachHour();
 pike.calcTotalCookies();
 makeHeaderRow();
+pike.render();
