@@ -20,7 +20,10 @@
 
           <!-- Used these site as a guide for form validation 
           https://www.w3schools.com/js/js_validation.asp
-          https://www.w3schools.com/html/html_form_input_types.asp  -->
+          https://www.w3schools.com/html/html_form_input_types.asp  
+        
+          Used this site to fix validation for floats:
+          https://stackoverflow.com/questions/19011861/is-there-a-float-input-type-in-html5 -->
           <label for="locationName">Location Name: </label>
           <input name="locationName" type="text" placeholder="Ex. Seattle Center" required/>
 
@@ -31,7 +34,7 @@
           <input name="maxCookies" type="number" placeholder="Ex. 9001" min="0" max="999999" required/>
 
           <label for="avgCookies">Avg Cookies Per Customer: </label>
-          <input name="avgCookies" type="number" placeholder="Ex. 4.8" min="0" max="999999" required/>
+          <input name="avgCookies" type="number" step="0.1" placeholder="Ex. 4.8" min="0" max="999999" required/>
 
           <button type="submit">Create New Location</button>
 
