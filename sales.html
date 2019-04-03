@@ -4,14 +4,41 @@
     <title>Cookie Sales</title>
     <link rel="stylesheet" href="./css/style.css">
   </head>
+
   <body>
+
     <header>
       <h1>Cookie Sales</h1>
     </header>
+
     <main>
+
+      <form id="location-form">
+        <fieldset>
+
+          <legend>Input New Location</legend>
+
+          <label for="location-name">Location Name: </label>
+          <input name="location-name" type="text" placeholder="Ex. Seattle Center"/>
+
+          <label for="min-cookies">Min Cookies Sold: </label>
+          <input name="min-cookies" type="text" placeholder="Ex. 2"/>
+
+          <label for="max-cookies">Max Cookies Sold: </label>
+          <input name="max-cookies" type="text" placeholder="Ex. 9001"/>
+
+          <label for="avg-cookies">Avg Cookies Per Customer: </label>
+          <input name="avg-cookies" type="text" placeholder="Ex. 4.8"/>
+
+          <button type="submit">Create New Location</button>
+
+        </fieldset>
+      </form>
+
       <table id="sales">
 
       </table>
+
     </main>
     <script src="js/app.js"></script>
   </body>

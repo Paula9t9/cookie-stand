@@ -3,6 +3,7 @@ var hours = 15;
 var allStores = [];
 var hourlyTotalCookies = [];
 var totalDayCookies = 0;
+var locationForm = document.getElementById('location-form');
 var salesTable = document.getElementById('sales');
 var tableBodyEl = document.createElement('tbody');
 
@@ -22,11 +23,11 @@ function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiePerCust){
 }
 
 
-var pike = new Store('1st and Pike', 23, 65, 6.3);
-var seaTac = new Store('SeaTac Airport', 3, 24, 1.2);
-var seaCenter = new Store('Seattle Center', 11, 38, 3.7);
-var capHill = new Store('Capitol Hill', 20, 38, 2.3);
-var alki = new Store('Alki', 2, 16, 4.6);
+new Store('1st and Pike', 23, 65, 6.3);
+new Store('SeaTac Airport', 3, 24, 1.2);
+new Store('Seattle Center', 11, 38, 3.7);
+new Store('Capitol Hill', 20, 38, 2.3);
+new Store('Alki', 2, 16, 4.6);
 
 
 //Calculates the number of customers every hour for a single location
