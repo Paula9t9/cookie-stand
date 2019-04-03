@@ -18,17 +18,20 @@
 
           <legend>Input New Location</legend>
 
+          <!-- Used these site as a guide for form validation 
+          https://www.w3schools.com/js/js_validation.asp
+          https://www.w3schools.com/html/html_form_input_types.asp  -->
           <label for="locationName">Location Name: </label>
-          <input name="locationName" type="text" placeholder="Ex. Seattle Center"/>
+          <input name="locationName" type="text" placeholder="Ex. Seattle Center" required/>
 
           <label for="minCookies">Min Cookies Sold: </label>
-          <input name="minCookies" type="text" placeholder="Ex. 2"/>
+          <input name="minCookies" type="number" placeholder="Ex. 2" min="0" max="999999" required/>
 
           <label for="maxCookies">Max Cookies Sold: </label>
-          <input name="maxCookies" type="text" placeholder="Ex. 9001"/>
+          <input name="maxCookies" type="number" placeholder="Ex. 9001" min="0" max="999999" required/>
 
           <label for="avgCookies">Avg Cookies Per Customer: </label>
-          <input name="avgCookies" type="text" placeholder="Ex. 4.8"/>
+          <input name="avgCookies" type="number" placeholder="Ex. 4.8" min="0" max="999999" required/>
 
           <button type="submit">Create New Location</button>
 
