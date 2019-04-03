@@ -5,7 +5,7 @@ var hourlyTotalCookies = [];
 var totalDayCookies = 0;
 var locationForm = document.getElementById('location-form');
 var salesTable = document.getElementById('sales');
-var tableBodyEl = document.createElement('tbody');
+var tableBody = document.createElement('tbody');
 
 
 //Renamed vars according to demo so naming is clearer
@@ -35,7 +35,7 @@ Store.prototype.calcCustEachHour = function(){
 
   for(var i=0; i < hours; i++){
     var customers = Math.round(Math.random() * (this.maxCustPerHour - this.minCustPerHour) + this.minCustPerHour);
-    this.custEachHour.push(customers);
+    this.custEachHour[i] = customers;
   }
 
 };
@@ -46,7 +46,7 @@ Store.prototype.calcCookiesEachHour = function(){
 
   for (var i=0; i < this.custEachHour.length; i++){
     var cookies = Math.ceil(this.custEachHour[i] * this.avgCookiePerCust);
-    this.cookiesEachHour.push(cookies);
+    this.cookiesEachHour[i] = cookies;
   }
 
 };
@@ -87,7 +87,7 @@ Store.prototype.render = function(){
   trEl.appendChild(tdEl);
 
   //Append the new row to the table body
-  tableBodyEl.appendChild(trEl);
+  tableBody.appendChild(trEl);
 };
 
 
@@ -126,7 +126,7 @@ function makeHeaderRow(){
 
 //Renders the data from all stores to the table body
 function renderAllStores(){
-  salesTable.appendChild(tableBodyEl);
+  salesTable.appendChild(tableBody);
   for(var i = 0; i < allStores.length; i++){
     allStores[i].render();
   }
@@ -197,7 +197,6 @@ function calcTotalHourlyCookies(){
     }
     hourlyTotalCookies[i] = thisHourTotal;
   }
-  console.log(`Hourly cookie array: ${hourlyTotalCookies}` );
 }
 
 
@@ -206,7 +205,6 @@ function calcTotalDayCookies(){
   for (var i = 0; i < hourlyTotalCookies.length; i++){
     totalDayCookies += hourlyTotalCookies[i];
   }
-  console.log(totalDayCookies);
 }
 
 
@@ -232,12 +230,40 @@ function calcTime(hour){
   return timeString;
 }
 
+//Runs all the necessary functions to calculate values for Stores and render all stores.
+function calcAndRenderAllStores(){
+  salesTable.innerHTML = '';
+  tableBody.innerHTML = '';
+  calcAllCustomers();
+  calcAllHourlyCookies();
+  calcAllTotalDailyCookies();
+  calcTotalHourlyCookies();
+  calcTotalDayCookies();
+  makeHeaderRow();
+  renderAllStores();
+  makeFooterRow();
+  console.log(allStores);
+}
 
-calcAllCustomers();
-calcAllHourlyCookies();
-calcAllTotalDailyCookies();
-calcTotalHourlyCookies();
-calcTotalDayCookies();
-makeHeaderRow();
-renderAllStores();
-makeFooterRow();
+function handleLocationSubmit(e){
+  //Prevent page from refreshing because we don't have persistence
+  event.preventDefault();
+
+  //Take in values
+  var locationName = e.target.locationName.value;
+  var minCookies = e.target.minCookies.value;
+  var maxCookies = e.target.maxCookies.value;
+  var avgCookies = e.target.avgCookies.value;
+
+  //Create a new Store with values
+  new Store(locationName, minCookies, maxCookies,avgCookies);
+
+
+  //render all Stores
+  calcAndRenderAllStores();
+}
+
+calcAndRenderAllStores();
+
+
+locationForm.addEventListener('submit', handleLocationSubmit);
