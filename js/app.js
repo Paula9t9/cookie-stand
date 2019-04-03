@@ -2,6 +2,7 @@
 var hours = 15;
 var allStores = [];
 var hourlyTotalCookies = [];
+var totalDayCookies = 0;
 var salesTable = document.getElementById('sales');
 var tableBodyEl = document.createElement('tbody');
 
@@ -17,6 +18,7 @@ function Store(locationName, minCustPerHour, maxCustPerHour, avgCookiePerCust){
   this.cookiesEachHour = [];
   this.totalCookiesForDay = 0;
   allStores.push(this);
+
 }
 
 
@@ -26,9 +28,8 @@ var seaCenter = new Store('Seattle Center', 11, 38, 3.7);
 var capHill = new Store('Capitol Hill', 20, 38, 2.3);
 var alki = new Store('Alki', 2, 16, 4.6);
 
-console.table(allStores);
 
-
+//Calculates the number of customers every hour for a single location
 Store.prototype.calcCustEachHour = function(){
 
   for(var i=0; i < hours; i++){
@@ -39,6 +40,7 @@ Store.prototype.calcCustEachHour = function(){
 };
 
 
+//Calculates the cookies each hour for a single location
 Store.prototype.calcCookiesEachHour = function(){
 
   for (var i=0; i < this.custEachHour.length; i++){
@@ -49,6 +51,7 @@ Store.prototype.calcCookiesEachHour = function(){
 };
 
 
+//Calculates the total cookies for a single location
 Store.prototype.calcTotalCookies = function(){
 
   for(var i=0; i < this.cookiesEachHour.length; i++){
@@ -58,13 +61,17 @@ Store.prototype.calcTotalCookies = function(){
 };
 
 
+//Renders a single location to the DOM
 Store.prototype.render = function(){
+  //Initialize row
   var trEl = document.createElement('tr');
 
+  //Create row title
   var tdEl = document.createElement('td');
   tdEl.textContent = this.locationName;
   trEl.appendChild(tdEl);
 
+  //Add all data for the location
   for(var i = 0; i < this.cookiesEachHour.length; i++){
 
     tdEl = document.createElement('td');
@@ -73,22 +80,28 @@ Store.prototype.render = function(){
 
   }
 
+  //Add the total to the end of the row
   tdEl = document.createElement('td');
   tdEl.textContent = this.totalCookiesForDay;
   trEl.appendChild(tdEl);
 
+  //Append the new row to the table body
   tableBodyEl.appendChild(trEl);
 };
 
 
+//Makes the header for the projected sales table body
 function makeHeaderRow(){
+  //Initialize the header row
   var tHeadEl = document.createElement('thead');
   var trEl = document.createElement('tr');
 
+  //Add the first header element and leave it blank to match planned layout
   var thEl = document.createElement('th');
   thEl.textContent = '';
   trEl.appendChild(thEl);
 
+  //Add the times for the row
   for(var i = 0; i < hours; i++){
     var currentHour = i + 6;
     var hourString = calcTime(currentHour);
@@ -98,16 +111,19 @@ function makeHeaderRow(){
     trEl.appendChild(thEl);
   }
 
+  //Add the Total Title Element
   thEl = document.createElement('th');
   thEl.textContent = 'Daily Location Total';
   trEl.appendChild(thEl);
 
+  //Append the row to the table header
   tHeadEl.appendChild(trEl);
   salesTable.appendChild(tHeadEl);
 
 }
 
 
+//Renders the data from all stores to the table body
 function renderAllStores(){
   salesTable.appendChild(tableBodyEl);
   for(var i = 0; i < allStores.length; i++){
@@ -116,15 +132,18 @@ function renderAllStores(){
 }
 
 
+//Renders the footer for the projected sales table
 function makeFooterRow(){
+  //Initialize table foot element and row element
   var tfootEl = document.createElement('tfoot');
   var trEl = document.createElement('tr');
 
+  //Add row title, "Totals: "
   var tdEl = document.createElement('td');
   tdEl.textContent = 'Totals: ';
   trEl.appendChild(tdEl);
 
-
+  //Populate row with data
   for (var i=0; i < hourlyTotalCookies.length; i++){
     tdEl = document.createElement('td');
     tdEl.textContent = hourlyTotalCookies[i];
@@ -132,11 +151,18 @@ function makeFooterRow(){
 
   }
 
+  //Put day's complete total at the end
+  tdEl = document.createElement('td');
+  tdEl.textContent = totalDayCookies;
+  trEl.appendChild(tdEl);
+
+  //Append the row to the footer
   tfootEl.appendChild(trEl);
   salesTable.appendChild(tfootEl);
 }
 
 
+//Calculates the customers for all stores
 function calcAllCustomers(){
   for(var i = 0; i < allStores.length; i++){
     allStores[i].calcCustEachHour();
@@ -144,13 +170,15 @@ function calcAllCustomers(){
 }
 
 
-function calcAllDailyCookies(){
+//Calculates the cookies for each hour for each location
+function calcAllHourlyCookies(){
   for(var i = 0; i < allStores.length; i++){
     allStores[i].calcCookiesEachHour();
   }
 }
 
 
+//Calculates the total daily cookies for each location
 function calcAllTotalDailyCookies(){
   for(var i = 0; i < allStores.length; i++){
     allStores[i].calcTotalCookies();
@@ -158,6 +186,7 @@ function calcAllTotalDailyCookies(){
 }
 
 
+//Calculate the total cookies per hour across all locations
 function calcTotalHourlyCookies(){
 
   for (var i = 0; i < hours; i++){
@@ -169,6 +198,16 @@ function calcTotalHourlyCookies(){
   }
   console.log(`Hourly cookie array: ${hourlyTotalCookies}` );
 }
+
+
+//Calculate the total cookies or the day across all hours and all locations
+function calcTotalDayCookies(){
+  for (var i = 0; i < hourlyTotalCookies.length; i++){
+    totalDayCookies += hourlyTotalCookies[i];
+  }
+  console.log(totalDayCookies);
+}
+
 
 //Take in the military time* and converts it to a standard string
 //*takes an int, not an actual time var
@@ -194,9 +233,10 @@ function calcTime(hour){
 
 
 calcAllCustomers();
-calcAllDailyCookies();
+calcAllHourlyCookies();
 calcAllTotalDailyCookies();
 calcTotalHourlyCookies();
+calcTotalDayCookies();
 makeHeaderRow();
 renderAllStores();
 makeFooterRow();
