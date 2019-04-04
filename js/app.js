@@ -55,6 +55,8 @@ Store.prototype.calcCookiesEachHour = function(){
 //Calculates the total cookies for a single location
 Store.prototype.calcTotalCookies = function(){
 
+  this.totalCookiesForDay = 0;
+
   for(var i=0; i < this.cookiesEachHour.length; i++){
     this.totalCookiesForDay += this.cookiesEachHour[i];
   }
@@ -88,6 +90,7 @@ Store.prototype.render = function(){
 
   //Append the new row to the table body
   tableBody.appendChild(trEl);
+
 };
 
 
@@ -126,10 +129,12 @@ function makeHeaderRow(){
 
 //Renders the data from all stores to the table body
 function renderAllStores(){
+
   salesTable.appendChild(tableBody);
   for(var i = 0; i < allStores.length; i++){
     allStores[i].render();
   }
+
 }
 
 
@@ -149,7 +154,6 @@ function makeFooterRow(){
     tdEl = document.createElement('td');
     tdEl.textContent = hourlyTotalCookies[i];
     trEl.appendChild(tdEl);
-
   }
 
   //Put day's complete total at the end
@@ -160,30 +164,37 @@ function makeFooterRow(){
   //Append the row to the footer
   tfootEl.appendChild(trEl);
   salesTable.appendChild(tfootEl);
+
 }
 
 
 //Calculates the customers for all stores
 function calcAllCustomers(){
+
   for(var i = 0; i < allStores.length; i++){
     allStores[i].calcCustEachHour();
   }
+
 }
 
 
 //Calculates the cookies for each hour for each location
 function calcAllHourlyCookies(){
+
   for(var i = 0; i < allStores.length; i++){
     allStores[i].calcCookiesEachHour();
   }
+
 }
 
 
 //Calculates the total daily cookies for each location
 function calcAllTotalDailyCookies(){
+
   for(var i = 0; i < allStores.length; i++){
     allStores[i].calcTotalCookies();
   }
+
 }
 
 
@@ -191,27 +202,35 @@ function calcAllTotalDailyCookies(){
 function calcTotalHourlyCookies(){
 
   for (var i = 0; i < hours; i++){
+
     var thisHourTotal = 0;
+
     for (var v = 0; v < allStores.length; v++){
       thisHourTotal += allStores[v].cookiesEachHour[i];
     }
+
     hourlyTotalCookies[i] = thisHourTotal;
   }
+
 }
 
 
 //Calculate the total cookies or the day across all hours and all locations
 function calcTotalDayCookies(){
+
   for (var i = 0; i < hourlyTotalCookies.length; i++){
     totalDayCookies += hourlyTotalCookies[i];
   }
+
 }
 
 
 //Take in the military time* and converts it to a standard string
 //*takes an int, not an actual time var
 function calcTime(hour){
+
   var am = true;
+
   if (hour === 12){
     am = false;
   }else if (hour > 12){
@@ -228,12 +247,15 @@ function calcTime(hour){
   }
 
   return timeString;
+
 }
 
 //Runs all the necessary functions to calculate values for Stores and render all stores.
 function calcAndRenderAllStores(){
+
   salesTable.innerHTML = '';
   tableBody.innerHTML = '';
+
   calcAllCustomers();
   calcAllHourlyCookies();
   calcAllTotalDailyCookies();
@@ -242,7 +264,9 @@ function calcAndRenderAllStores(){
   makeHeaderRow();
   renderAllStores();
   makeFooterRow();
+
   console.log(allStores);
+
 }
 
 function handleLocationSubmit(e){
@@ -261,6 +285,7 @@ function handleLocationSubmit(e){
 
   //render all Stores
   calcAndRenderAllStores();
+
 }
 
 calcAndRenderAllStores();
