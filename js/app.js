@@ -218,6 +218,8 @@ function calcTotalHourlyCookies(){
 //Calculate the total cookies or the day across all hours and all locations
 function calcTotalDayCookies(){
 
+  totalDayCookies = 0;
+
   for (var i = 0; i < hourlyTotalCookies.length; i++){
     totalDayCookies += hourlyTotalCookies[i];
   }
@@ -280,11 +282,26 @@ function handleLocationSubmit(e){
   var avgCookies = e.target.avgCookies.value;
 
   //Create a new Store with values
-  new Store(locationName, minCookies, maxCookies,avgCookies);
+  var newStore = new Store(locationName, minCookies, maxCookies,avgCookies);
 
+  //Clear input fields
+  e.target.locationName.value = null;
+  e.target.minCookies.value = null;
+  e.target.maxCookies.value = null;
+  e.target.avgCookies.value = null;
 
-  //render all Stores
-  calcAndRenderAllStores();
+  //Calc and render new Store
+  salesTable.innerHTML = '';
+  tableBody.innerHTML = '';
+
+  newStore.calcCustEachHour();
+  newStore.calcCookiesEachHour();
+  newStore.calcTotalCookies();
+  calcTotalHourlyCookies();
+  calcTotalDayCookies();
+  makeHeaderRow();
+  renderAllStores();
+  makeFooterRow();
 
 }
 
