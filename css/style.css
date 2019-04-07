@@ -1,9 +1,17 @@
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
+
 /* Entire Page */
 
 html {
   background-color: #d8bb84;
+  font-family: 'Roboto', sans-serif;
   color: #1d1a1d;
-  margin-top:30px;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold;
 }
 
 /* Header */
@@ -14,6 +22,7 @@ nav {
   width: 960px;
   margin: 0px auto;
   position: fixed;
+  top: 0;
 }
 
 nav li {
@@ -34,7 +43,34 @@ nav img {
 
 /* Body */
 
-main {
+section {
+  padding: 20px;
+  margin-top: 100px;
+  overflow: auto;
+
+  border: 1px solid green;
+}
+
+/* Used this to figure out how to select every other img within secion: https://stackoverflow.com/questions/32232998/nth-of-type-does-not-work-properly */
+section:nth-of-type(even) img{
+  float: right;
+  max-height: 200px;
+  margin-left: 15px;
+}
+
+section:nth-of-type(odd) img{
+  float: left;
+  max-height: 200px;
+  margin-right: 15px;
+}
+
+section h2{
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.testimonial {
+  font-style: italic;
 }
 
 /* Footer */
