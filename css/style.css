@@ -1,3 +1,46 @@
+/* Entire Page */
+
+html {
+  background-color: #d8bb84;
+  color: #1d1a1d;
+  margin-top:30px;
+}
+
+/* Header */
+
+nav {
+  background-color: #ce6b41;
+  padding: 30px;
+  width: 960px;
+  margin: 0px auto;
+  position: fixed;
+}
+
+nav li {
+  display: inline-block;
+  padding-right: 15px;
+  font-size: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1d1a1d;
+}
+
+nav img {
+  float: left;
+  max-height: 20px;
+}
+
+/* Body */
+
+main {
+}
+
+/* Footer */
+
+/* Sales Page Things */
+
 #sales{
   column-count: auto;
   column-width: 200px;
@@ -7,14 +50,4 @@
 .storeItem{
   width: 100%;
   display: inline-block;
-}
-
-html {
-  background-color: #d8bb84;
-}
-
-h1 {
-  color: #1d1a1d;
-  background-color: #ce6b41;
-  padding: 30px;
 }
