@@ -19,7 +19,7 @@ h1, h2, h3 {
 nav {
   background-color: #ce6b41;
   padding: 30px;
-  width: 960px;
+  width: 100%;
   margin: 0px auto;
   position: fixed;
   top: 0;
@@ -71,6 +71,21 @@ section h2{
 
 .testimonial {
   font-style: italic;
+}
+
+#featured img {
+  clear: both;
+  float: none;
+}
+
+#featured h3 {
+  display: block;
+  margin-top: 10px;
+  margin-left: 50px;
+  color: #a03d16;
+  font-weight: bold;
+  font-style: italic;
+
 }
 
 /* Footer */
