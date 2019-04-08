@@ -7,6 +7,7 @@ html {
   background-color: #d8bb84;
   font-family: 'Roboto', sans-serif;
   color: #1d1a1d;
+  margin: auto;
 }
 
 h1, h2, h3 {
@@ -16,39 +17,52 @@ h1, h2, h3 {
 
 /* Header */
 
-nav {
-  background-color: #ce6b41;
-  padding: 30px;
-  width: 100%;
-  margin: 0px auto;
+header {
   position: fixed;
+  background-color: #ce6b41;
   top: 0;
+  width: 100%;
+}
+
+nav {
+  max-width: 900px;
+  padding: 30px;
+  margin: auto;
 }
 
 nav li {
   display: inline-block;
   padding-right: 15px;
+  padding-bottom: 10px;
   font-size: 20px;
+}
+
+nav li:first-child{
+  padding-bottom: 0px;
 }
 
 nav a {
   text-decoration: none;
   color: #1d1a1d;
+  vertical-align: top;
 }
 
 nav img {
   float: left;
-  max-height: 20px;
+  max-height: 30px;
 }
 
 /* Body */
 
-section {
-  padding: 20px;
-  margin-top: 100px;
-  overflow: auto;
+section:first-child {
+  margin-top: 120px;
+}
 
-  border: 1px solid green;
+section {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
+  overflow: auto;
 }
 
 /* Used this to figure out how to select every other img within secion: https://stackoverflow.com/questions/32232998/nth-of-type-does-not-work-properly */
@@ -85,20 +99,22 @@ section h2{
   color: #a03d16;
   font-weight: bold;
   font-style: italic;
-
 }
 
 /* Footer */
 
-/* Sales Page Things */
-
-#sales{
-  column-count: auto;
-  column-width: 200px;
-  column-gap: 40px;
+footer{
+  background-color: #ce6b41;
+  padding: 10px;
 }
 
-.storeItem{
-  width: 100%;
-  display: inline-block;
+footer img {
+  max-height: 50px;
+}
+
+footer ul {
+  margin: 0px auto;
+  padding-bottom: 15x;
+  max-width: 200px;
+  text-align: center;
 }

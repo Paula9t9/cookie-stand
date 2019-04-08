@@ -1,0 +1,60 @@
+/* Entire Doc */
+
+body {
+  margin: auto;
+}
+
+html {
+  background-color: #d8bb84;
+}
+
+/* Header */
+
+h1 {
+  color: #1d1a1d;
+  background-color: #ce6b41;
+  padding: 30px;
+}
+
+/* Form */
+
+#location-form {
+  margin-top: 100px;
+  margin-left: 30px;
+  max-width: 900px;
+}
+
+#location-form fieldset {
+  border: 1px solid black;
+  margin: auto;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+/* Table */
+
+#sales{
+  margin-left: 30px;
+  max-width: 900px;
+}
+
+/* Used this to figure out why table widths were broken: https://stackoverflow.com/questions/11090544/td-widths-not-working/11090559 */
+#sales td, th {
+  max-width: 100px;
+  max-height: 30px;
+  padding: 5px;
+  text-align: center;
+}
+
+th {
+  font-weight: bold;
+}
+
+tbody tr:nth-child(odd) {
+  background: #ce6b40;
+}
+
+.storeItem{
+  width: 100%;
+  display: inline-block;
+}
