@@ -1,20 +1,120 @@
-#sales{
-  column-count: auto;
-  column-width: 200px;
-  column-gap: 40px;
-}
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
 
-.storeItem{
-  width: 100%;
-  display: inline-block;
-}
+/* Entire Page */
 
 html {
   background-color: #d8bb84;
+  font-family: 'Roboto', sans-serif;
+  color: #1d1a1d;
+  margin: auto;
 }
 
-h1 {
-  color: #1d1a1d;
+h1, h2, h3 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold;
+}
+
+/* Header */
+
+header {
+  position: fixed;
   background-color: #ce6b41;
+  top: 0;
+  width: 100%;
+}
+
+nav {
+  max-width: 900px;
   padding: 30px;
+  margin: auto;
+}
+
+nav li {
+  display: inline-block;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  font-size: 20px;
+}
+
+nav li:first-child{
+  padding-bottom: 0px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1d1a1d;
+  vertical-align: top;
+}
+
+nav img {
+  float: left;
+  max-height: 30px;
+}
+
+/* Body */
+
+section:first-child {
+  margin-top: 120px;
+}
+
+section {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
+  overflow: auto;
+}
+
+/* Used this to figure out how to select every other img within secion: https://stackoverflow.com/questions/32232998/nth-of-type-does-not-work-properly */
+section:nth-of-type(even) img{
+  float: right;
+  max-height: 200px;
+  margin-left: 15px;
+}
+
+section:nth-of-type(odd) img{
+  float: left;
+  max-height: 200px;
+  margin-right: 15px;
+}
+
+section h2{
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.testimonial {
+  font-style: italic;
+}
+
+#featured img {
+  clear: both;
+  float: none;
+}
+
+#featured h3 {
+  display: block;
+  margin-top: 10px;
+  margin-left: 50px;
+  color: #a03d16;
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Footer */
+
+footer{
+  background-color: #ce6b41;
+  padding: 10px;
+}
+
+footer img {
+  max-height: 50px;
+}
+
+footer ul {
+  margin: 0px auto;
+  padding-bottom: 15x;
+  max-width: 200px;
+  text-align: center;
 }
